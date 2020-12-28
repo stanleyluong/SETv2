@@ -5,7 +5,6 @@ const baseURL = "https://raw.githubusercontent.com/stanleyluong/SET/151b482e77d6
 function main(){
     fetchCards()
     pageButtons()
-    console.log(cards)
 }
 
 function k_combinations(set, k) {
@@ -69,21 +68,15 @@ const valid = set => {
     }
     if ((numberValid == true) && (shapeValid == true) && (shadingValid == true) && (colorValid == true)) { 
         validity = true
-        console.log(a,b,c)
     }
     return validity
 }
 
 function fetchCards(){
-    // fetch("http://localhost:3000/cards")
-    // .then(response => response.json())
-    // .then(cards => initialRandomCards(cards, [], []))
-    console.log(cards)
     initialRandomCards(cards,[],[])
 }
 
 async function initialRandomCards(cards, currentCards, usedCards){
-    console.log('cards',cards.length,'currentCards',currentCards.length,'usedCards',usedCards.length*3)
     while (document.getElementById("container").hasChildNodes()){
         document.getElementById("container").removeChild(document.getElementById("container").lastChild)
     }
@@ -97,13 +90,20 @@ async function initialRandomCards(cards, currentCards, usedCards){
         } 
     }
     let cardsRemaining = document.getElementById('cardsRemaining')
-    cardsRemaining.textContent = `Cards in Deck: ${cards.length}`
+    cardsRemaining.textContent = `Deck: ${cards.length} cards`
     let cardsOnTable = document.getElementById('currentCards')
-    cardsOnTable.textContent = `Cards on Table: ${currentCards.length}`
+    cardsOnTable.textContent = `Table: ${currentCards.length} cards`
     let counter = document.getElementById('setsFound')
-    counter.textContent=`Sets Found: ${setsFound}`
+    counter.textContent=`Sets: ${setsFound} found`
     let combos = k_combinations(currentCards, 3)
-    console.log('some valid',combos.some(valid))
+    let availableSet = document.getElementById('availableSet')
+    let available = 0
+    combos.forEach(combo=>{
+        if(valid(combo)===true){
+            available++
+        }
+    })
+    availableSet.textContent= `Possible Sets: ${available}`
     currentCards.forEach(card => {
         let image = document.createElement("img")
         image.src = baseURL+card.img
@@ -113,20 +113,16 @@ async function initialRandomCards(cards, currentCards, usedCards){
             image.style.backgroundColor="yellow"
             if (!selected.includes(card)){
                 selected.push(card)
-                console.log(selected.length)
                 threeClicks(selected, cards, currentCards, usedCards)
             } else {
                 image.style.backgroundColor=null
                 selected = selected.filter(c => c !== card)
-                console.log(selected)
             }
         }
         cardTable.appendChild(image)
     })
     let images = document.getElementsByClassName("img")
     let container = document.getElementById("container")
-    // console.log(images)
-    // console.log(currentCards.length)
     switch(currentCards.length){
         case 3:
             for(i=0;i<images.length;i++){
@@ -301,15 +297,10 @@ async function initialRandomCards(cards, currentCards, usedCards){
             }
         } else {
             alert("There are no more cards in the deck!")
-            console.log("cards remaining in deck", cards)
         }
-        console.log("cards on table", currentCards.length)
-        console.log("cards remaining in deck", cards.length)
-        console.log("used cards",usedCards.length*3)
         initialRandomCards(cards, currentCards, usedCards)
     }
 }
-
 function threeClicks(selected, cards, currentCards, usedCards){
     if (selected.length == 3) {
         submitAttempt(valid(selected), selected, cards, currentCards, usedCards) 
@@ -317,70 +308,34 @@ function threeClicks(selected, cards, currentCards, usedCards){
 }
 let setsFound = 0
 function submitAttempt(validity, selected, cards, currentCards, usedCards){
-    console.log('cards',cards)
     let sets = document.getElementById('sets')
     if (validity === true){
-        //add valid set to found sets
         let set = document.createElement('div')
         set.className = "set"
         for(i=0;i<selected.length;i++){
             let image = document.createElement('img')
-            
             image.src = baseURL+selected[i].img
-            console.log(image.src)
             image.className = "found-img"
             set.appendChild(image)
         }
         sets.appendChild(set)
         usedCards.push(selected)
-
-        console.log(selected)
-        console.log(currentCards)
-       
-        //if current cards is less than 12 (9 cards)
         selected.forEach(card=>{
             currentCards = currentCards.filter(ccard=>{
                 return ccard!==card
             })
         })
-        console.log('currentcards after removing selected',currentCards)
-        
-        // for (y=0; y<currentCards.length; y++) {
-        //     if (selected[i].id == currentCards[y].id){
-        //         if(currentCards.length <= 12){
-        //             if(cards.length>0){
-        //                 let randomNumber = Math.floor(Math.random() * (cards.length))
-        //                 console.log('cards before splice',cards)
-
-        //                 let card = cards.splice(randomNumber,1)
-        //                 console.log('cards after',cards)
-
-        //                 currentCards.splice(y, 1, card)
-        //             } else {
-        //                 currentCards.splice(y, 1)
-        //             }
-        //         } else {
-        //             currentCards.splice(y,1)
-        //             let lastCard = currentCards.splice(currentCards.length-1,1)
-        //             currentCards.splice(y-1, 0, lastCard[0])
-        //         }
-        //     }
-        // }
         let combos = k_combinations(currentCards, 3)
         if(cards.length===0 && combos.some(valid)===false){
             alert('Congratulations! There are no possible valid sets remaining.')
         } else {
-            console.log('cards on line 354',cards)
             initialRandomCards(cards, currentCards, usedCards)
         }
         setsFound++
         let counter = document.getElementById('setsFound')
         counter.textContent=`Sets Found: ${setsFound}`
-
-        console.log('setsFound',setsFound)
     } else {
         selected = []
-        console.log("failed validity")
         initialRandomCards(cards, currentCards, usedCards)
     }
 }  
@@ -389,4 +344,5 @@ function pageButtons(){
     newGameButton.addEventListener("click", e => {
         location.reload()
     })
-} 
+
+}
