@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", main)
-const baseURL = "https://raw.githubusercontent.com/stanleyluong/SET/151b482e77d677f3b211f4e84ad0dc1cc74c688f/tes-backend/app/images/svg/icons/"
-
+const baseURL = "https://raw.githubusercontent.com/stanleyluong/SETv2/854d659176d31e8f0d52773c57e8c4f1bb678d2c/images/"
 
 function main(){
-    fetchCards()
+    initialRandomCards(cards,[],[])
     pageButtons()
     console.log('By Stanley Luong')
 }
@@ -73,11 +72,7 @@ const valid = set => {
     return validity
 }
 
-function fetchCards(){
-    initialRandomCards(cards,[],[])
-}
-
-async function initialRandomCards(cards, currentCards, usedCards){
+function initialRandomCards(cards, currentCards, usedCards){
     while (document.getElementById("container").hasChildNodes()){
         document.getElementById("container").removeChild(document.getElementById("container").lastChild)
     }
