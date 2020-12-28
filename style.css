@@ -45,6 +45,7 @@ body {
 .img {
   cursor:pointer;
   /* width: 1.5rem; */
+  /* transform: rotate(90deg); */
   display: inline-flex;
   /* height: 150px; */
   /* flex-grow: 1; */
