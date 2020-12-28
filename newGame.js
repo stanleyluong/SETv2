@@ -93,13 +93,60 @@ function initialRandomCards(cards, currentCards, usedCards){
     counter.textContent=`Sets: ${setsFound} found`
     let combos = k_combinations(currentCards, 3)
     let availableSet = document.getElementById('availableSet')
-    let available = 0
+    // let available = 0
+    let available = []
     combos.forEach(combo=>{
         if(valid(combo)===true){
-            available++
+            available.push(combo)
         }
     })
-    availableSet.textContent= `Possible Sets: ${available}`
+    availableSet.textContent = `Possible Sets: ${available.length}`
+    availableSet.onclick = function() {toggleShowSets()}
+    let showSets = false
+    function toggleShowSets(){
+        showSets = !showSets
+        console.log(showSets)
+        if(showSets){
+            console.log(available)
+            available.forEach(a=>{
+                let set = document.createElement('div')
+                // set.className = "set"
+                for(i=0;i<a.length;i++){
+                    let image = document.createElement('img')
+                    image.src = baseURL+a[i].img
+                    image.className = "found-img"
+                    set.appendChild(image)
+                }
+                availableSet.appendChild(set)
+                // document.getElementById("container").appendChild(set)
+            })
+        }
+        if(!showSets){
+            while (document.getElementById("availableSet").hasChildNodes()){
+                document.getElementById("availableSet").removeChild(document.getElementById("availableSet").lastChild)
+            }
+            availableSet.textContent = `Possible Sets: ${available.length}`
+        }
+    }
+    function show(){
+        console.log(available)
+        available.forEach(a=>{
+            let set = document.createElement('div')
+            // set.className = "set"
+            for(i=0;i<a.length;i++){
+                let image = document.createElement('img')
+                image.src = baseURL+a[i].img
+                image.className = "found-img"
+                set.appendChild(image)
+            }
+            availableSet.appendChild(set)
+        })
+    }
+    function hide(){
+        while (document.getElementById("availableSet").hasChildNodes()){
+            document.getElementById("availableSet").removeChild(document.getElementById("availableSet").lastChild)
+        }
+    }
     currentCards.forEach(card => {
         let image = document.createElement("img")
         image.src = baseURL+card.img
