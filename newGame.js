@@ -5,6 +5,7 @@ const baseURL = "https://raw.githubusercontent.com/stanleyluong/SET/151b482e77d6
 function main(){
     fetchCards()
     pageButtons()
+    console.log('By Stanley Luong')
 }
 
 function k_combinations(set, k) {
