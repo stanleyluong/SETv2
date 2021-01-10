@@ -62,7 +62,7 @@ const valid = set => {
     } else {
         colorValid=true
     }
-    if(numberValid&&shapeValid&&shadingVal&&colorValid){ 
+    if(numberValid&&shapeValid&&shadingValid&&colorValid){ 
         validity=true
     }
     return validity
