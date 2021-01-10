@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:set="https://github.com/hildjj/set-game"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   height="227"
+   width="352"
+   id="svg30283"
+   sodipodi:docname="3SrS.svg"
+   inkscape:version="1.0.1 (c497b03c, 2020-09-10)">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="689"
+     inkscape:window-height="480"
+     id="namedview30285"
+     showgrid="false"
+     inkscape:zoom="2.8"
+     inkscape:cx="176"
+     inkscape:cy="113.5"
+     inkscape:window-x="44"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg30283" />
+  <metadata
+     id="metadata30268">
+    <set:num>3</set:num>
+    <set:fill>Solid</set:fill>
+    <set:color>red</set:color>
+    <set:shape>Squiggle</set:shape>
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs30273">
+    <path
+       class="setcolor setline"
+       id="shape"
+       d="m 33,180 c 6,-13 11,-23 26,-28 15,-5 31,-1 58,7 23,7 36,0 43,-3 7,-4 17,-9 30,-9 13,0 18,21 12,33 -5,11 -14,23 -26,28 -12,5 -32,1 -59,-7 -17,-5 -29,-3 -42,3 -9,4 -18,10 -30,9 -13,0 -19,-18 -12,-33 z" />
+    <style
+       type="text/css"
+       id="style30271">
+      .setcolor {
+        stroke: red;
+        fill: red;
+      }
+      .setline {
+        stroke-width: 4;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <rect
+     x="1"
+     y="-351"
+     height="350"
+     width="225"
+     rx="10"
+     ry="10"
+     fill="#ffffff"
+     stroke="#808080"
+     stroke-width="2"
+     id="rect30275"
+     transform="rotate(90)" />
+  <g
+     id="g30290"
+     transform="rotate(90,179.78128,176.05534)">
+    <use
+       y="-100"
+       xlink:href="#shape"
+       id="use30277"
+       x="0"
+       width="100%"
+       height="100%" />
+    <use
+       xlink:href="#shape"
+       id="use30279"
+       x="0"
+       y="0"
+       width="100%"
+       height="100%" />
+    <use
+       y="100"
+       xlink:href="#shape"
+       id="use30281"
+       x="0"
+       width="100%"
+       height="100%" />
+  </g>
+</svg>

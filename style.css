@@ -28,10 +28,11 @@ body {
 
 #container {
   /* height: 150px; */
-  padding: 1%;
+  padding: auto;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
+  /* transform: rotate(90deg); */
   /* align-content: center; */
   /* align-items: stretch; */
   /* justify-content: space-around; */

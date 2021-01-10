@@ -42,32 +42,28 @@ const valid = set => {
     let shapeValid = null
     let shadingValid = null
     let colorValid = null
-    if (!((a.number == b.number) && (b.number == c.number) ||
-            (a.number != b.number) && (a.number != c.number) && (b.number != c.number))) {
+    if(!((a.number==b.number)&&(b.number==c.number)||(a.number!=b.number)&&(a.number != c.number) && (b.number != c.number))){
         numberValid = false;
     } else {
         numberValid = true
     }     
-    if (!((a.shape == b.shape) && (b.shape == c.shape) ||
-            (a.shape != b.shape) && (a.shape != c.shape) && (b.shape != c.shape))) {
+    if(!((a.shape == b.shape) && (b.shape == c.shape) ||(a.shape != b.shape) && (a.shape != c.shape) && (b.shape != c.shape))){
         shapeValid = false;
     } else {
         shapeValid = true
     }
-    if (!((a.shading == b.shading) && (b.shading == c.shading) ||
-        (a.shading != b.shading) && (a.shading != c.shading) && (b.shading != c.shading))) {
+    if(!((a.shading == b.shading) && (b.shading == c.shading)||(a.shading != b.shading) && (a.shading != c.shading) && (b.shading != c.shading))){
         shadingValid = false;
     } else {
         shadingValid = true
     }
-    if (!((a.color == b.color) && (b.color == c.color) ||
-            (a.color != b.color) && (a.color != c.color) && (b.color != c.color))) {
-        colorValid = false;
+    if(!((a.color == b.color) && (b.color == c.color) ||(a.color != b.color) && (a.color != c.color) && (b.color!=c.color))){
+        colorValid=false;
     } else {
-        colorValid = true
+        colorValid=true
     }
-    if ((numberValid == true) && (shapeValid == true) && (shadingValid == true) && (colorValid == true)) { 
-        validity = true
+    if(numberValid&&shapeValid&&shadingVal&&colorValid){ 
+        validity=true
     }
     return validity
 }
@@ -177,25 +173,25 @@ function initialRandomCards(cards, currentCards, usedCards){
             for(i=0;i<images.length;i++){
                 images[i].style.width = "25%"
                 container.style.width = "37%"
-            }   
+            }
             break
         case 9:
             for(i=0;i<images.length;i++){
                 images[i].style.width = "25%"
                 container.style.width = "37%"
-            }   
+            }
             break
         case 12:
             for(i=0;i<images.length;i++){
                 images[i].style.width = "25%"
                 container.style.width = "37%"
-            }   
+            }
             break
         case 15:
             for(i=0;i<images.length;i++){
                 images[i].style.width = "20%"
                 container.style.width = "46%"
-            }  
+            }
             break
         case 18:
             for(i=0;i<images.length;i++){
