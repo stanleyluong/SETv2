@@ -69,8 +69,13 @@ const valid = set => {
 }
 
 function initialRandomCards(cards, currentCards, usedCards){
-    while (document.getElementById("container").hasChildNodes()){
-        document.getElementById("container").removeChild(document.getElementById("container").lastChild)
+    let possibleSets = document.getElementById("possibleSets")
+    while (possibleSets.hasChildNodes()){
+        possibleSets.removeChild(possibleSets.lastChild)
+    }
+    let container = document.getElementById("container")
+    while (container.hasChildNodes()){
+        container.removeChild(document.getElementById("container").lastChild)
     }
     let cardTable = document.getElementById("container")
     let selected = []
@@ -88,67 +93,49 @@ function initialRandomCards(cards, currentCards, usedCards){
     let counter = document.getElementById('setsFound')
     counter.textContent=`Sets: ${setsFound} found`
     let combos = k_combinations(currentCards, 3)
-    let availableSet = document.getElementById('availableSet')
-    // let available = 0
-    let available = []
+    let possibleSetsButton = document.getElementById('possibleSetsButton')
+    let possible = []
     combos.forEach(combo=>{
         if(valid(combo)===true){
-            available.push(combo)
+            possible.push(combo)
         }
     })
-    availableSet.textContent = `Possible Sets: ${available.length}`
-    availableSet.onclick = function() {toggleShowSets()}
+    possibleSetsButton.textContent = `Possible Sets: ${possible.length}`
+    possibleSetsButton.onclick = function() {toggleShowSets()}
     let showSets = false
     function toggleShowSets(){
         showSets = !showSets
         console.log(showSets)
         if(showSets){
-            console.log(available)
-            available.forEach(a=>{
+            console.log(possible)
+            possible.forEach(a=>{
                 let set = document.createElement('div')
+                set.className = "set"
                 for(i=0;i<a.length;i++){
                     let image = document.createElement('img')
                     image.src = baseURL+a[i].img
                     image.className = "found-img"
                     set.appendChild(image)
                 }
-                availableSet.appendChild(set)
+                console.log(possibleSets)
+                possibleSets.className = "sets"
+                possibleSets.appendChild(set)
             })
         }
         if(!showSets){
-            while (document.getElementById("availableSet").hasChildNodes()){
-                document.getElementById("availableSet").removeChild(document.getElementById("availableSet").lastChild)
+            while (document.getElementById("possibleSets").hasChildNodes()){
+                document.getElementById("possibleSets").removeChild(document.getElementById("possibleSets").lastChild)
             }
-            availableSet.textContent = `Possible Sets: ${available.length}`
-        }
-    }
-    function show(){
-        console.log(available)
-        available.forEach(a=>{
-            let set = document.createElement('div')
-            // set.className = "set"
-            for(i=0;i<a.length;i++){
-                let image = document.createElement('img')
-                image.src = baseURL+a[i].img
-                image.className = "found-img"
-                set.appendChild(image)
-            }
-            availableSet.appendChild(set)
-        })
-    }
-    function hide(){
-        while (document.getElementById("availableSet").hasChildNodes()){
-            document.getElementById("availableSet").removeChild(document.getElementById("availableSet").lastChild)
+            possibleSetsButton.textContent = `Possible Sets: ${possible.length}`
         }
     }
     let selectedImages = []
-
     currentCards.forEach(card => {
         let image = document.createElement("img")
         image.src = baseURL+card.img
         image.id = card.img
         image.setAttribute("class", "img")
-        image.style.border = "thick solid #b17720"
+        image.style.border = "thick solid lightblue"
         image.onclick = e => {
             image.style.border = "thick solid yellow"
             // image.setAttribute("class","selected")
@@ -164,188 +151,8 @@ function initialRandomCards(cards, currentCards, usedCards){
             },300)
            
         }
-        cardTable.appendChild(image)
+        container.appendChild(image)
     })
-    let images = document.getElementsByClassName("img")
-    let container = document.getElementById("container")
-    // images.forEach(image=>{
-    //     console.log(image)
-    //     image.style.width = "31%"
-    // })
-    for(i=0;i<images.length;i++){
-        images[i].style.width = "32.29%"
-    }
-    container.style.width = "100%"
-    // switch(currentCards.length){
-    //     case 3:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "25%"
-    //             container.style.width = "37%"
-    //         }   
-    //         break
-    //     case 6:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "25%"
-    //             container.style.width = "37%"
-    //         }
-    //         break
-    //     case 9:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "25%"
-    //             container.style.width = "37%"
-    //         }
-    //         break
-    //     case 12:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "32%"
-    //             container.style.width = "100%"
-    //         }
-    //         break
-    //     case 15:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "32%"
-    //             container.style.width = "100%"
-    //         }
-    //         break
-    //     case 18:
-    //         for(i=0;i<images.length;i++){
-    //             // images[i].style.width = "16.6666667%"
-    //             // container.style.width = "100%"
-    //             images[i].style.width = "32%"
-    //             container.style.width = "100%"
-    //         }
-    //         break
-    //     case 21:
-    //         for(i=0;i<images.length;i++){
-    //             // images[i].style.width = "14.2857143%"
-    //             // container.style.width = "64%"
-    //             images[i].style.width = "32%"
-    //             container.style.width = "100%"
-    //         }
-    //         break
-    //     case 24:
-    //         for(i=0;i<images.length;i++){
-    //             // images[i].style.width = "12.5%"
-    //             // container.style.width = "73%"
-    //             images[i].style.width = "32%"
-    //             container.style.width = "100%"
-    //         }
-    //         break
-    //     case 27:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "11.111111%"
-    //             container.style.width = "83%"
-    //             }
-    //         break
-    //     case 30:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "11.111111%"
-    //             container.style.width = "61%"
-    //         }   
-    //         break
-    //     case 33:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "11.111111%"
-    //             container.style.width = "61%"
-    //         }  
-    //         break
-    //     case 36:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "11.111111%"
-    //             container.style.width = "61%"
-    //         }
-    //         break
-    //     case 39:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "10%"
-    //             container.style.width = "68%"
-    //         }
-    //         break
-    //     case 42:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "9.09%"
-    //             container.style.width = "75%"
-    //         }
-    //         break
-    //     case 45:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "8.33333%"
-    //             container.style.width = "82%"
-    //         }
-    //         break
-    //     case 48:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "8.33333%"
-    //             container.style.width = "82%"
-    //         }   
-    //         break
-    //     case 51:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "7.69%"
-    //             container.style.width = "89%"
-    //         }  
-    //         break
-    //     case 54:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "7.14%"
-    //             container.style.width = "96%"
-    //         }
-    //         break
-    //     case 57:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "7.14%"
-    //             container.style.width = "76%"
-    //         }
-    //         break
-    //     case 60:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "7.14%"
-    //             container.style.width = "76%"
-    //         }
-    //         break
-    //     case 63:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "7.14%"
-    //             container.style.width = "76%"
-    //         }
-    //         break
-    //     case 66:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "7.14%"
-    //             container.style.width = "76%"
-    //         }
-    //         break
-    //     case 69:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "7.14%"
-    //             container.style.width = "76%"
-    //         }
-    //         break
-    //     case 72:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "6.6666667%"
-    //             container.style.width = "82%"
-    //         }
-    //         break
-    //     case 75:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "6.6666667%"
-    //             container.style.width = "82%"
-    //         }
-    //         break
-    //     case 78:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "6.25%"
-    //             container.style.width = "87%"
-    //         }
-    //         break
-    //     case 81:
-    //         for(i=0;i<images.length;i++){
-    //             images[i].style.width = "6.25%"
-    //             container.style.width = "72%"
-    //         }
-    //         break
-    // }
     let moreCardsButton = document.getElementById("moreCards")
     moreCardsButton.onclick = () => {
         if (cards.length > 0){
@@ -367,7 +174,7 @@ function threeClicks(selected, cards, currentCards, usedCards, selectedImages){
 }
 let setsFound = 0
 function submitAttempt(validity, selected, cards, currentCards, usedCards, selectedImages){
-    let sets = document.getElementById('sets')
+    let foundSets = document.getElementById('foundSets')
     if (validity === true){
         // console.log(selectedImages)
         // setTimeout(function(){
@@ -379,14 +186,14 @@ function submitAttempt(validity, selected, cards, currentCards, usedCards, selec
         // },100)
         setTimeout(function(){
             let set = document.createElement('div')
-        set.className = "set"
-        for(i=0;i<selected.length;i++){
+            set.className = "set"
+            for(i=0;i<selected.length;i++){
             let image = document.createElement('img')
             image.src = baseURL+selected[i].img
             image.className = "found-img"
             set.appendChild(image)
         }
-        sets.appendChild(set)
+        foundSets.appendChild(set)
         usedCards.push(selected)
         selected.forEach(card=>{
             currentCards = currentCards.filter(ccard=>{
