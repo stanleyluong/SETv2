@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", main)
-const baseURL = "https://raw.githubusercontent.com/stanleyluong/SETv2/854d659176d31e8f0d52773c57e8c4f1bb678d2c/images/"
+const baseURL = "https://raw.githubusercontent.com/stanleyluong/SETv2/703ddf82efb258606878e50ff286f96253399c94/svg/"
 
 function main(){
     initialRandomCards(cards,[],[])
@@ -143,20 +143,29 @@ function initialRandomCards(cards, currentCards, usedCards){
             document.getElementById("availableSet").removeChild(document.getElementById("availableSet").lastChild)
         }
     }
+    let selectedImages = []
+
     currentCards.forEach(card => {
         let image = document.createElement("img")
         image.src = baseURL+card.img
         image.id = card.img
         image.setAttribute("class", "img")
+        image.style.border = "thick solid #b17720"
+        // image.style.borderColor="yellow"
         image.onclick = e => {
-            image.style.backgroundColor="yellow"
-            if (!selected.includes(card)){
-                selected.push(card)
-                threeClicks(selected, cards, currentCards, usedCards)
-            } else {
-                image.style.backgroundColor=null
-                selected = selected.filter(c => c !== card)
-            }
+            image.style.border = "thick solid yellow"
+            // image.setAttribute("class","selected")
+            setTimeout(function(){
+                if (!selected.includes(card)){
+                    selected.push(card)
+                    selectedImages.push(image)
+                    threeClicks(selected, cards, currentCards, usedCards, selectedImages)
+                } else {
+                    image.style.border = "thick solid #b17720"
+                    selected = selected.filter(c => c !== card)
+                }
+            },300)
+           
         }
         cardTable.appendChild(image)
     })
@@ -183,14 +192,14 @@ function initialRandomCards(cards, currentCards, usedCards){
             break
         case 12:
             for(i=0;i<images.length;i++){
-                images[i].style.width = "25%"
-                container.style.width = "37%"
+                images[i].style.width = "32%"
+                container.style.width = "100%"
             }
             break
         case 15:
             for(i=0;i<images.length;i++){
-                images[i].style.width = "20%"
-                container.style.width = "46%"
+                images[i].style.width = "32%"
+                container.style.width = "100%"
             }
             break
         case 18:
@@ -340,16 +349,25 @@ function initialRandomCards(cards, currentCards, usedCards){
         initialRandomCards(cards, currentCards, usedCards)
     }
 }
-function threeClicks(selected, cards, currentCards, usedCards){
+function threeClicks(selected, cards, currentCards, usedCards, selectedImages){
     if (selected.length == 3) {
-        submitAttempt(valid(selected), selected, cards, currentCards, usedCards) 
+        submitAttempt(valid(selected), selected, cards, currentCards, usedCards, selectedImages) 
     }
 }
 let setsFound = 0
-function submitAttempt(validity, selected, cards, currentCards, usedCards){
+function submitAttempt(validity, selected, cards, currentCards, usedCards, selectedImages){
     let sets = document.getElementById('sets')
     if (validity === true){
-        let set = document.createElement('div')
+        // console.log(selectedImages)
+        // setTimeout(function(){
+            selectedImages.forEach(image=>{
+                console.log(image)
+                image.style.border = "thick solid greenyellow"
+            })
+            console.log('timeout')
+        // },100)
+        setTimeout(function(){
+            let set = document.createElement('div')
         set.className = "set"
         for(i=0;i<selected.length;i++){
             let image = document.createElement('img')
@@ -373,9 +391,19 @@ function submitAttempt(validity, selected, cards, currentCards, usedCards){
         setsFound++
         let counter = document.getElementById('setsFound')
         counter.textContent=`Sets Found: ${setsFound}`
+        },300)
+        
     } else {
-        selected = []
-        initialRandomCards(cards, currentCards, usedCards)
+        console.log(selected)
+        selectedImages.forEach(image=>{
+            console.log(image)
+            image.style.border = "thick solid red"
+        })
+        setTimeout(function(){
+            selected = []
+            initialRandomCards(cards, currentCards, usedCards)
+        },300)
+        
     }
 }  
 function pageButtons(){
