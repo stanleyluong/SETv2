@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", main)
 const baseURL = "https://raw.githubusercontent.com/stanleyluong/SETv2/703ddf82efb258606878e50ff286f96253399c94/svg/"
-
 function main(){
     initialRandomCards(cards,[],[])
     pageButtons()
@@ -153,17 +152,191 @@ function initialRandomCards(cards, currentCards, usedCards){
         }
         container.appendChild(image)
     })
+
+    let images = document.getElementsByClassName("img")
+    switch(currentCards.length){
+        case 3:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "32%"
+                container.style.width = "100%"
+            }   
+            break
+        case 6:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "32%"
+                container.style.width = "100%"
+            }
+            break
+        case 9:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "32%"
+                container.style.width = "100%"
+            }
+            break
+        case 12:
+            for(i=0;i<images.length;i++){
+                // images[i].style.width = "25%"
+                // container.style.width = "37%"
+                images[i].style.width = "32%"
+                container.style.width = "100%"
+            }
+            break
+        case 15:
+            for(i=0;i<images.length;i++){
+                // images[i].style.width = "20%"
+                // container.style.width = "46%"
+                images[i].style.width = "32%"
+                container.style.width = "100%"
+            }
+            break
+        case 18:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "32%"
+                container.style.width = "100%"
+            }
+            break
+        case 21:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "32%"
+                container.style.width = "100%"
+            }
+            break
+        case 24:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "32%"
+                container.style.width = "100%"
+            }
+            break
+        case 27:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "23.5%"
+                container.style.width = "100%"
+                }
+            break
+        case 30:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "23.5%"
+                container.style.width = "100%"
+            }   
+            break
+        case 33:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "23.5%"
+                container.style.width = "100%"
+            }  
+            break
+        case 36:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "23.5%"
+                container.style.width = "100%"
+            }
+            break
+        case 39:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "23.5%"
+                container.style.width = "100%"
+            }
+            break
+        case 42:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "18.5%"
+                container.style.width = "100%"
+            }
+            break
+        case 45:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "18.5%"
+                container.style.width = "100%"
+            }
+            break
+        case 48:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "18.5%"
+                container.style.width = "100%"
+            }   
+            break
+        case 51:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "18.5%"
+                container.style.width = "100%"
+            }  
+            break
+        case 54:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "18.5%"
+                container.style.width = "100%"
+            }
+            break
+        case 57:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "18.5%"
+                container.style.width = "100%"
+            }
+            break
+        case 60:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "18.5%"
+                container.style.width = "100%"
+            }
+            break
+        case 63:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "18.5%"
+                container.style.width = "100%"
+            }
+            break
+        case 66:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "15.6%"
+                container.style.width = "100%"
+            }
+            break
+        case 69:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "15.6%"
+                container.style.width = "100%"
+            }
+            break
+        case 72:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "15.6%"
+                container.style.width = "100%"
+            }
+            break
+        case 75:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "15.6%"
+                container.style.width = "100%"
+            }
+            break
+        case 78:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "15.6%"
+                container.style.width = "100%"
+            }
+            break
+        case 81:
+            for(i=0;i<images.length;i++){
+                images[i].style.width = "15.6%"
+                container.style.width = "100%"
+            }
+            break
+    }
+    
     let moreCardsButton = document.getElementById("moreCards")
     moreCardsButton.onclick = () => {
         if (cards.length > 0){
             for (i=0; i<3; i++){
-            let randomNumber = Math.floor(Math.random() * (cards.length))
-            let card = cards.splice(randomNumber,1)
-            currentCards.push(card[0])
+                let randomNumber = Math.floor(Math.random() * (cards.length))
+                let card = cards.splice(randomNumber,1)
+                currentCards.push(card[0])
             }
         } else {
             alert("There are no more cards in the deck!")
         }
+        let missedSetsCounter = document.getElementById("missedSetsCounter")
+        missedSets += possible.length
+        missedSetsCounter.textContent = `Missed Sets:`+missedSets
         initialRandomCards(cards, currentCards, usedCards)
     }
 }
@@ -202,7 +375,7 @@ function submitAttempt(validity, selected, cards, currentCards, usedCards, selec
         })
         let combos = k_combinations(currentCards, 3)
         if(cards.length===0 && combos.some(valid)===false){
-            alert('Congratulations! There are no possible valid sets remaining.')
+            alert(`Congratulations! There are no possible valid sets remaining. Elapsed time:${elapsedTime/60}:${elapsedTime%60}. Missed Sets: ${missedSets}`)
         } else {
             initialRandomCards(cards, currentCards, usedCards)
         }
@@ -223,11 +396,33 @@ function submitAttempt(validity, selected, cards, currentCards, usedCards, selec
         },300)
         
     }
-}  
+}
+let missedSets = 0
+let elapedTime = 0
 function pageButtons(){
     let newGameButton = document.getElementById("newGameButton")
     newGameButton.addEventListener("click", e => {
         location.reload()
     })
+    // let clock = document.getElementById("clock")
+    var minutesLabel = document.getElementById("minutes");
+    var secondsLabel = document.getElementById("seconds");
+    var totalSeconds = 0;
+    setInterval(setTime,1000)
+    function setTime() {
+        ++totalSeconds;
+        elapsedTime = totalSeconds
+        secondsLabel.innerHTML = pad(totalSeconds % 60);
+        minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+      }
+      
+      function pad(val) {
+        var valString = val + "";
+        if (valString.length < 2) {
+          return "0" + valString;
+        } else {
+          return valString;
+        }
+      }
 
 }
