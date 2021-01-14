@@ -1,0 +1,5 @@
+X unclick color is different, need to change it back to normal color
+X put  found sets on same line
+x add wrong sets counter
+x count how many times possible sets button was clicked
+change css media query depending on javascript conditions?

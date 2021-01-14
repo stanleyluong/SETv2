@@ -75,7 +75,7 @@ body {
 
 #foundSets {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap:; */
   /* width: 10%; */
   position: sticky;
   bottom: 0;
@@ -118,7 +118,7 @@ body {
   .img {
     /* background-color: teal; */
     /* width: 24.39%; */
-    width: 15% !important; 
+    width: 20% !important; 
   }
   /* body {
     background-color: black;

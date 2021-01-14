@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", main)
 const baseURL = "https://raw.githubusercontent.com/stanleyluong/SETv2/703ddf82efb258606878e50ff286f96253399c94/svg/"
+let wrongSets = 0, missedSets = 0, hints = 0
+
 function main(){
     initialRandomCards(cards,[],[])
     pageButtons()
@@ -90,7 +92,7 @@ function initialRandomCards(cards, currentCards, usedCards){
     let cardsOnTable = document.getElementById('currentCards')
     cardsOnTable.textContent = `Table: ${currentCards.length} cards`
     let counter = document.getElementById('setsFound')
-    counter.textContent=`Sets: ${setsFound} found`
+    counter.textContent=`Sets Found: ${setsFound}`
     let combos = k_combinations(currentCards, 3)
     let possibleSetsButton = document.getElementById('possibleSetsButton')
     let possible = []
@@ -100,7 +102,17 @@ function initialRandomCards(cards, currentCards, usedCards){
         }
     })
     possibleSetsButton.textContent = `Possible Sets: ${possible.length}`
-    possibleSetsButton.onclick = function() {toggleShowSets()}
+    let usedShowSets = false
+    let hintsUsed = document.getElementById('hints')
+    possibleSetsButton.onclick = function() {
+        if(usedShowSets===false){
+            hints++
+            hintsUsed.textContent = `Hints Used: ${hints}`
+            usedShowSets = true
+        }
+        toggleShowSets()
+    }
+    
     let showSets = false
     function toggleShowSets(){
         showSets = !showSets
@@ -144,8 +156,9 @@ function initialRandomCards(cards, currentCards, usedCards){
                     selectedImages.push(image)
                     threeClicks(selected, cards, currentCards, usedCards, selectedImages)
                 } else {
-                    image.style.border = "thick solid #b17720"
+                    image.style.border = "thick solid lightblue"
                     selected = selected.filter(c => c !== card)
+                    selectedImages = selectedImages.filter(c => c !== image)
                 }
             },300)
            
@@ -392,14 +405,17 @@ function submitAttempt(validity, selected, cards, currentCards, usedCards, selec
         })
         setTimeout(function(){
             selected = []
+            let wrongSetsCounter = document.getElementById("wrongSetsCounter")
+            wrongSets++
+            wrongSetsCounter.textContent = `Wrong Sets: ${wrongSets}`
             initialRandomCards(cards, currentCards, usedCards)
         },300)
         
     }
 }
-let missedSets = 0
-let elapedTime = 0
+
 function pageButtons(){
+    
     let newGameButton = document.getElementById("newGameButton")
     newGameButton.addEventListener("click", e => {
         location.reload()
@@ -411,7 +427,7 @@ function pageButtons(){
     setInterval(setTime,1000)
     function setTime() {
         ++totalSeconds;
-        elapsedTime = totalSeconds
+        // elapsedTime = totalSeconds
         secondsLabel.innerHTML = pad(totalSeconds % 60);
         minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
       }
