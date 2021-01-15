@@ -14,7 +14,7 @@ body {
 
 .menu-item {
   width: 23%;
-  margin: 1% auto;
+  margin: 0 auto;
 	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
 	background-color:#ffec64;
 	border-radius:6px;
@@ -24,7 +24,7 @@ body {
 	font-family:'Press Start 2P', sans-serif;
 	font-size: 150%;
 	font-weight:bold;
-	padding: 1%;
+	padding: .5%;
 	text-decoration:none;
   text-shadow:0px 1px 0px #ffee66;
   text-align:center;
@@ -34,7 +34,7 @@ button {
 }
 .stats {
   width: 12%;
-  margin: 1% auto;
+  margin: .5% auto;
 	/* background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%); */
 	background-color:#d6ca78;
 	/* border-radius:6px; */
