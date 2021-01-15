@@ -5,34 +5,63 @@ body {
 
 #menu {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap:wrap;
   position:sticky;
   top: 0;
   opacity: .8;
+  /* width: 35%; */
 }
 
 .menu-item {
-  width: 10.0%;
-  margin: auto;
+  width: 23%;
+  margin: 1% auto;
 	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
 	background-color:#ffec64;
 	border-radius:6px;
   border: 1px solid red;
-	cursor:pointer;
+	/* cursor:pointer; */
 	color:#333333;
 	font-family:'Press Start 2P', sans-serif;
-	font-size: 10%;
+	font-size: 150%;
 	font-weight:bold;
-	padding: 6px 24px;
+	padding: 1%;
 	text-decoration:none;
   text-shadow:0px 1px 0px #ffee66;
+  text-align:center;
+}
+button {
+  cursor: pointer;
+}
+.stats {
+  width: 12%;
+  margin: 1% auto;
+	/* background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%); */
+	background-color:#d6ca78;
+	/* border-radius:6px; */
+  border: 1px solid red;
+	/* cursor:pointer; */
+	color:#333333;
+	font-family:'Press Start 2P', sans-serif;
+	font-size: 120%;
+	font-weight:bold;
+	padding: 1%;
+	text-decoration:none;
+  text-shadow:0px 1px 0px #ffee66;
+  text-align:center;
+}
+
+#possibleSets {
+  text-align: center;
+}
+
+#foundSets {
   text-align: center;
 }
 
 #container {
   /* height: 150px; */
-  padding: auto;
-  margin: auto;
+  /* padding: auto; */
+  /* margin: auto; */
   display: flex;
   flex-wrap: wrap;
   /* transform: scale(2); */
@@ -42,7 +71,7 @@ body {
   /* display: inline-flex; */
   /* flex-wrap: wrap; */
   /* flex-direction: column; */
-  width: 100%;
+  /* width: 100%; */
   /* text-align: center; */
 
 }

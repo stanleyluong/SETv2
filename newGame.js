@@ -129,7 +129,7 @@ function initialRandomCards(cards, currentCards, usedCards){
                     set.appendChild(image)
                 }
                 console.log(possibleSets)
-                possibleSets.className = "sets"
+                // possibleSets.className = "sets"
                 possibleSets.appendChild(set)
             })
         }
@@ -388,7 +388,7 @@ function submitAttempt(validity, selected, cards, currentCards, usedCards, selec
         })
         let combos = k_combinations(currentCards, 3)
         if(cards.length===0 && combos.some(valid)===false){
-            alert(`Congratulations! There are no possible valid sets remaining. Elapsed time:${elapsedTime/60}:${elapsedTime%60}. Missed Sets: ${missedSets}`)
+            alert(`Congratulations! There are no possible valid sets or drawable cards in your deck remaining. Elapsed time:${elapsedTime/60}:${elapsedTime%60}. Missed Sets: ${missedSets}`)
         } else {
             initialRandomCards(cards, currentCards, usedCards)
         }
