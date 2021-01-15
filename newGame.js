@@ -1,8 +1,11 @@
 document.addEventListener("DOMContentLoaded", main)
 const baseURL = "https://raw.githubusercontent.com/stanleyluong/SETv2/703ddf82efb258606878e50ff286f96253399c94/svg/"
-let wrongSets = 0, missedSets = 0, hints = 0
+let wrongSets = 0, missedSets = 0, hints = 0, elapsedTime = 0
 
 function main(){
+    // cards.splice(0,40)
+    
+    // console.log(cards)
     initialRandomCards(cards,[],[])
     pageButtons()
     console.log('By Stanley Luong')
@@ -388,7 +391,7 @@ function submitAttempt(validity, selected, cards, currentCards, usedCards, selec
         })
         let combos = k_combinations(currentCards, 3)
         if(cards.length===0 && combos.some(valid)===false){
-            alert(`Congratulations! There are no possible valid sets or drawable cards in your deck remaining. Elapsed time:${elapsedTime/60}:${elapsedTime%60}. Missed Sets: ${missedSets}`)
+            alert(`Congratulations! Elapsed time:${Math.floor(elapsedTime/60)}:${(elapsedTime%60)-1}. Missed Sets: ${missedSets}, Wrong Sets: ${wrongSets}, Hints: ${hints}`)
         } else {
             initialRandomCards(cards, currentCards, usedCards)
         }
@@ -427,7 +430,7 @@ function pageButtons(){
     setInterval(setTime,1000)
     function setTime() {
         ++totalSeconds;
-        // elapsedTime = totalSeconds
+        elapsedTime = totalSeconds
         secondsLabel.innerHTML = pad(totalSeconds % 60);
         minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
       }
