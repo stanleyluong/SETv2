@@ -338,9 +338,9 @@ function initialRandomCards(cards, currentCards, usedCards){
             }
             break
     }
-    
-    let moreCardsButton = document.getElementById("moreCards")
-    moreCardsButton.onclick = () => {
+    let drawOneButton = document.getElementById('drawOne')
+    let drawThreeButton = document.getElementById("drawThree")
+    drawThreeButton.onclick = () => {
         if (cards.length > 0){
             for (i=0; i<3; i++){
                 let randomNumber = Math.floor(Math.random() * (cards.length))
@@ -355,6 +355,20 @@ function initialRandomCards(cards, currentCards, usedCards){
         missedSetsCounter.textContent = `Missed Sets:`+missedSets
         initialRandomCards(cards, currentCards, usedCards)
     }
+    drawOneButton.onclick = () => {
+        if (cards.length > 0){
+                let randomNumber = Math.floor(Math.random() * (cards.length))
+                let card = cards.splice(randomNumber,1)
+                currentCards.push(card[0])
+        } else {
+            alert("There are no more cards in the deck!")
+        }
+        let missedSetsCounter = document.getElementById("missedSetsCounter")
+        missedSets += possible.length
+        missedSetsCounter.textContent = `Missed Sets:`+missedSets
+        initialRandomCards(cards, currentCards, usedCards)
+    }
+
 }
 function threeClicks(selected, cards, currentCards, usedCards, selectedImages){
     if (selected.length == 3) {
