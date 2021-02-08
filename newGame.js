@@ -81,7 +81,6 @@ function initialRandomCards(cards, currentCards, usedCards){
     while (container.hasChildNodes()){
         container.removeChild(document.getElementById("container").lastChild)
     }
-    let cardTable = document.getElementById("container")
     let selected = []
     if (cards.length > 0){
         while (currentCards.length < 12){
@@ -115,13 +114,10 @@ function initialRandomCards(cards, currentCards, usedCards){
         }
         toggleShowSets()
     }
-    
     let showSets = false
     function toggleShowSets(){
         showSets = !showSets
-        console.log(showSets)
         if(showSets){
-            console.log(possible)
             possible.forEach(a=>{
                 let set = document.createElement('div')
                 set.className = "set"
@@ -131,8 +127,6 @@ function initialRandomCards(cards, currentCards, usedCards){
                     image.className = "found-img"
                     set.appendChild(image)
                 }
-                console.log(possibleSets)
-                // possibleSets.className = "sets"
                 possibleSets.appendChild(set)
             })
         }
@@ -152,7 +146,6 @@ function initialRandomCards(cards, currentCards, usedCards){
         image.style.border = "thick solid lightblue"
         image.onclick = e => {
             image.style.border = "thick solid yellow"
-            // image.setAttribute("class","selected")
             setTimeout(function(){
                 if (!selected.includes(card)){
                     selected.push(card)
@@ -168,175 +161,89 @@ function initialRandomCards(cards, currentCards, usedCards){
         }
         container.appendChild(image)
     })
-
     let images = document.getElementsByClassName("img")
     switch(currentCards.length){
+        case 1:for(i=0;i<images.length;i++){images[i].style.width = "66%"}break
+        case 2:for(i=0;i<images.length;i++){images[i].style.width = "48%"}break
         case 3:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "32%"
-                container.style.width = "100%"
-            }   
-            break
-        case 6:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "32%"
-                container.style.width = "100%"
-            }
-            break
+        case 4:for(i=0;i<images.length;i++){images[i].style.width = "33%"}break
+        case 5:
+        case 6:for(i=0;i<images.length;i++){images[i].style.width = "32%"}break
+        case 7:
+        case 8:for(i=0;i<images.length;i++){images[i].style.width = "23%"}break
         case 9:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "32%"
-                container.style.width = "100%"
-            }
-            break
-        case 12:
-            for(i=0;i<images.length;i++){
-                // images[i].style.width = "25%"
-                // container.style.width = "37%"
-                images[i].style.width = "32%"
-                container.style.width = "100%"
-            }
-            break
-        case 15:
-            for(i=0;i<images.length;i++){
-                // images[i].style.width = "20%"
-                // container.style.width = "46%"
-                images[i].style.width = "32%"
-                container.style.width = "100%"
-            }
-            break
+        case 10:
+        case 11:
+        case 12:for(i=0;i<images.length;i++){images[i].style.width = "21%"}break
+        case 13:
+        case 14:
+        case 15:for(i=0;i<images.length;i++){images[i].style.width = "18.9%"}break
+        case 16:
+        case 17:
         case 18:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "32%"
-                container.style.width = "100%"
-            }
-            break
+        case 19:
+        case 20:for(i=0;i<images.length;i++){images[i].style.width = "15.7%"}break
         case 21:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "32%"
-                container.style.width = "100%"
-            }
-            break
-        case 24:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "32%"
-                container.style.width = "100%"
-            }
-            break
+        case 22:
+        case 23:
+        case 24:for(i=0;i<images.length;i++){images[i].style.width = "15.6%"}break
+        case 25:
+        case 26:
         case 27:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "23.5%"
-                container.style.width = "100%"
-                }
-            break
+        case 28:for(i=0;i<images.length;i++){images[i].style.width = "13.1%"}break
+        case 29:
         case 30:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "23.5%"
-                container.style.width = "100%"
-            }   
-            break
+        case 31:
+        case 32:
         case 33:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "23.5%"
-                container.style.width = "100%"
-            }  
-            break
+        case 34:
+        case 35:for(i=0;i<images.length;i++){images[i].style.width = "12.4%"}break
         case 36:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "23.5%"
-                container.style.width = "100%"
-            }
-            break
+        case 37:
+        case 38:
         case 39:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "23.5%"
-                container.style.width = "100%"
-            }
-            break
+        case 40:for(i=0;i<images.length;i++){images[i].style.width = "11.3%"}break
+        case 41:
         case 42:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "18.5%"
-                container.style.width = "100%"
-            }
-            break
-        case 45:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "18.5%"
-                container.style.width = "100%"
-            }
-            break
+        case 43:
+        case 44:
+        case 45:for(i=0;i<images.length;i++){images[i].style.width = "10%"}break
+        case 46:
+        case 47:
         case 48:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "18.5%"
-                container.style.width = "100%"
-            }   
-            break
+        case 49:
+        case 50:
         case 51:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "18.5%"
-                container.style.width = "100%"
-            }  
-            break
-        case 54:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "18.5%"
-                container.style.width = "100%"
-            }
-            break
+        case 52:
+        case 53:
+        case 54:for(i=0;i<images.length;i++){images[i].style.width = "9.3%"}break
+        case 55:
+        case 56:
         case 57:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "18.5%"
-                container.style.width = "100%"
-            }
-            break
-        case 60:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "18.5%"
-                container.style.width = "100%"
-            }
-            break
+        case 58:
+        case 59:
+        case 60:for(i=0;i<images.length;i++){images[i].style.width = "8.9%"}break
+        case 61:
+        case 62:
         case 63:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "18.5%"
-                container.style.width = "100%"
-            }
-            break
+        case 64:
+        case 65:
         case 66:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "15.6%"
-                container.style.width = "100%"
-            }
-            break
+        case 67:
+        case 68:
         case 69:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "15.6%"
-                container.style.width = "100%"
-            }
-            break
+        case 70:for(i=0;i<images.length;i++){images[i].style.width = "8.3%"}break
+        case 71:
         case 72:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "15.6%"
-                container.style.width = "100%"
-            }
-            break
+        case 73:
+        case 74:
         case 75:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "15.6%"
-                container.style.width = "100%"
-            }
-            break
+        case 76:
+        case 77:for(i=0;i<images.length;i++){images[i].style.width = "7.8%"}break
         case 78:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "15.6%"
-                container.style.width = "100%"
-            }
-            break
-        case 81:
-            for(i=0;i<images.length;i++){
-                images[i].style.width = "15.6%"
-                container.style.width = "100%"
-            }
-            break
+        case 79:
+        case 80:
+        case 81:for(i=0;i<images.length;i++){images[i].style.width = "7.2%"}break
     }
     let drawOneButton = document.getElementById('drawOne')
     let drawThreeButton = document.getElementById("drawThree")

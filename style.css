@@ -33,7 +33,7 @@ button {
   cursor: pointer;
 }
 .stats {
-  width: 12%;
+  width: 10%;
   margin: .5% auto;
 	/* background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%); */
 	background-color:#d6ca78;
@@ -67,7 +67,7 @@ button {
   /* transform: scale(2); */
   /* align-content: center; */
   /* align-items: stretch; */
-  justify-content: space-around;
+  justify-content:space-evenly;
   /* display: inline-flex; */
   /* flex-wrap: wrap; */
   /* flex-direction: column; */
@@ -123,37 +123,39 @@ button {
   width: 33.33%;
 }
 
-/* @media only screen and (max-width: 400px) {
+/* @media only screen and (min-width: 100px) {
   .img {
-    background-color: orange;
-    width: 30%;
+    width: 27% !important; 
   }
-  body {
-    background-color: red;
-  }
-} 
-
- @media only screen and (min-width: 400px) {
+}
+@media only screen and (min-width: 200px) {
   .img {
-    background-color: green;
-    width: 30%;
+    width: 27% !important; 
   }
-  body {
-    background-color: orchid;
+}
+@media only screen and (min-width: 375px) {
+  .img {
+    width: 30% !important; 
+  }
+}
+@media only screen and (min-width: 600px) {
+  .img {
+    width: 25% !important; 
+  }
+}
+@media only screen and (min-width: 850px) {
+  .img {
+    width: 24% !important; 
+  }
+}
+@media only screen and (min-width: 875px) {
+  .img {
+    width: 23% !important; 
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .img {
+    width: 19.5% !important; 
   }
 } */
 
-@media only screen and (min-width: 1000px) {
-  .img {
-    /* background-color: teal; */
-    /* width: 24.39%; */
-    width: 20% !important; 
-  }
-  /* body {
-    background-color: black;
-  } */
-  /* #container {
-    background-color: cadetblue;
-    height: 30%;
-  } */
-}
