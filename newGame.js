@@ -261,7 +261,7 @@ function initialRandomCards(cards, currentCards, usedCards){
             case 9:
             case 10:
             case 11:
-            case 12:for(i=0;i<images.length;i++){images[i].style.width = "25%"}break
+            case 12:for(i=0;i<images.length;i++){images[i].style.width = "21%"}break
             case 13:
             case 14:
             case 15:for(i=0;i<images.length;i++){images[i].style.width = "18.9%"}break
