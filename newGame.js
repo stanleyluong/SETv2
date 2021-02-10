@@ -3,9 +3,6 @@ const baseURL = "https://raw.githubusercontent.com/stanleyluong/SETv2/703ddf82ef
 let wrongSets = 0, missedSets = 0, hints = 0, elapsedTime = 0
 
 function main(){
-    // cards.splice(0,40)
-    
-    // console.log(cards)
     initialRandomCards(cards,[],[])
     pageButtons()
     console.log('By Stanley Luong')
@@ -73,6 +70,9 @@ const valid = set => {
 }
 
 function initialRandomCards(cards, currentCards, usedCards){
+    window.addEventListener("orientationchange",()=>{
+        sizeImages(currentCards)
+    })
     let possibleSets = document.getElementById("possibleSets")
     while (possibleSets.hasChildNodes()){
         possibleSets.removeChild(possibleSets.lastChild)
@@ -157,13 +157,124 @@ function initialRandomCards(cards, currentCards, usedCards){
                     selectedImages = selectedImages.filter(c => c !== image)
                 }
             },300)
-           
         }
         container.appendChild(image)
     })
+    sizeImages(currentCards)
+    let drawOneButton = document.getElementById('drawOne')
+    let drawThreeButton = document.getElementById("drawThree")
+    drawThreeButton.onclick = () => {
+        if (cards.length > 0){
+            for (i=0; i<3; i++){
+                let randomNumber = Math.floor(Math.random() * (cards.length))
+                let card = cards.splice(randomNumber,1)
+                currentCards.push(card[0])
+            }
+        } else {
+            alert("There are no more cards in the deck!")
+        }
+        let missedSetsCounter = document.getElementById("missedSetsCounter")
+        missedSets += possible.length
+        missedSetsCounter.textContent = `Missed Sets:`+missedSets
+        initialRandomCards(cards, currentCards, usedCards)
+    }
+    drawOneButton.onclick = () => {
+        if (cards.length > 0){
+                let randomNumber = Math.floor(Math.random() * (cards.length))
+                let card = cards.splice(randomNumber,1)
+                currentCards.push(card[0])
+        } else {
+            alert("There are no more cards in the deck!")
+        }
+        let missedSetsCounter = document.getElementById("missedSetsCounter")
+        missedSets += possible.length
+        missedSetsCounter.textContent = `Missed Sets:`+missedSets
+        initialRandomCards(cards, currentCards, usedCards)
+    }
+}
+function threeClicks(selected, cards, currentCards, usedCards, selectedImages){
+    if (selected.length == 3) {
+        submitAttempt(valid(selected), selected, cards, currentCards, usedCards, selectedImages) 
+    }
+}
+let setsFound = 0
+function submitAttempt(validity, selected, cards, currentCards, usedCards, selectedImages){
+    let foundSets = document.getElementById('foundSets')
+    if (validity === true){
+            selectedImages.forEach(image=>{
+                console.log(image)
+                image.style.border = "thick solid greenyellow"
+            })
+            console.log('timeout')
+        setTimeout(function(){
+            let set = document.createElement('div')
+            set.className = "set"
+            for(i=0;i<selected.length;i++){
+            let image = document.createElement('img')
+            image.src = baseURL+selected[i].img
+            image.className = "found-img"
+            set.appendChild(image)
+        }
+        foundSets.appendChild(set)
+        usedCards.push(selected)
+        selected.forEach(card=>{
+            currentCards = currentCards.filter(ccard=>{
+                return ccard!==card
+            })
+        })
+        let combos = k_combinations(currentCards, 3)
+        if(cards.length===0 && combos.some(valid)===false){
+            alert(`Congratulations! Elapsed time:${Math.floor(elapsedTime/60)}:${(elapsedTime%60)-1}. Missed Sets: ${missedSets}, Wrong Sets: ${wrongSets}, Hints: ${hints}`)
+        } else {
+            initialRandomCards(cards, currentCards, usedCards)
+        }
+        setsFound++
+        let counter = document.getElementById('setsFound')
+        counter.textContent=`Sets Found: ${setsFound}`
+        },300)
+    } else {
+        console.log(selected)
+        selectedImages.forEach(image=>{
+            console.log(image)
+            image.style.border = "thick solid red"
+        })
+        setTimeout(function(){
+            selected = []
+            let wrongSetsCounter = document.getElementById("wrongSetsCounter")
+            wrongSets++
+            wrongSetsCounter.textContent = `Wrong Sets: ${wrongSets}`
+            initialRandomCards(cards, currentCards, usedCards)
+        },300)
+    }
+}
+
+function pageButtons(){
+    let newGameButton = document.getElementById("newGameButton")
+    newGameButton.addEventListener("click", e => {
+        location.reload()
+    })
+    var minutesLabel = document.getElementById("minutes");
+    var secondsLabel = document.getElementById("seconds");
+    var totalSeconds = 0;
+    setInterval(setTime,1000)
+    function setTime() {
+        ++totalSeconds;
+        elapsedTime = totalSeconds
+        secondsLabel.innerHTML = pad(totalSeconds % 60);
+        minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+      }
+      function pad(val) {
+        var valString = val + "";
+        if (valString.length < 2) {
+          return "0" + valString;
+        } else {
+          return valString;
+        }
+      }
+}
+
+function sizeImages(currentCards){
     let images = document.getElementsByClassName("img")
-    console.log(window.screen.width, 'width')
-    console.log(window.screen.height, 'height')
     if(window.screen.width < window.screen.height){
         switch(currentCards.length){
             case 1:for(i=0;i<images.length;i++){images[i].style.width = "100%"}break
@@ -333,124 +444,4 @@ function initialRandomCards(cards, currentCards, usedCards){
             case 81:for(i=0;i<images.length;i++){images[i].style.width = "7.2%"}break
         }
     }
-    let drawOneButton = document.getElementById('drawOne')
-    let drawThreeButton = document.getElementById("drawThree")
-    drawThreeButton.onclick = () => {
-        if (cards.length > 0){
-            for (i=0; i<3; i++){
-                let randomNumber = Math.floor(Math.random() * (cards.length))
-                let card = cards.splice(randomNumber,1)
-                currentCards.push(card[0])
-            }
-        } else {
-            alert("There are no more cards in the deck!")
-        }
-        let missedSetsCounter = document.getElementById("missedSetsCounter")
-        missedSets += possible.length
-        missedSetsCounter.textContent = `Missed Sets:`+missedSets
-        initialRandomCards(cards, currentCards, usedCards)
-    }
-    drawOneButton.onclick = () => {
-        if (cards.length > 0){
-                let randomNumber = Math.floor(Math.random() * (cards.length))
-                let card = cards.splice(randomNumber,1)
-                currentCards.push(card[0])
-        } else {
-            alert("There are no more cards in the deck!")
-        }
-        let missedSetsCounter = document.getElementById("missedSetsCounter")
-        missedSets += possible.length
-        missedSetsCounter.textContent = `Missed Sets:`+missedSets
-        initialRandomCards(cards, currentCards, usedCards)
-    }
-
-}
-function threeClicks(selected, cards, currentCards, usedCards, selectedImages){
-    if (selected.length == 3) {
-        submitAttempt(valid(selected), selected, cards, currentCards, usedCards, selectedImages) 
-    }
-}
-let setsFound = 0
-function submitAttempt(validity, selected, cards, currentCards, usedCards, selectedImages){
-    let foundSets = document.getElementById('foundSets')
-    if (validity === true){
-        // console.log(selectedImages)
-        // setTimeout(function(){
-            selectedImages.forEach(image=>{
-                console.log(image)
-                image.style.border = "thick solid greenyellow"
-            })
-            console.log('timeout')
-        // },100)
-        setTimeout(function(){
-            let set = document.createElement('div')
-            set.className = "set"
-            for(i=0;i<selected.length;i++){
-            let image = document.createElement('img')
-            image.src = baseURL+selected[i].img
-            image.className = "found-img"
-            set.appendChild(image)
-        }
-        foundSets.appendChild(set)
-        usedCards.push(selected)
-        selected.forEach(card=>{
-            currentCards = currentCards.filter(ccard=>{
-                return ccard!==card
-            })
-        })
-        let combos = k_combinations(currentCards, 3)
-        if(cards.length===0 && combos.some(valid)===false){
-            alert(`Congratulations! Elapsed time:${Math.floor(elapsedTime/60)}:${(elapsedTime%60)-1}. Missed Sets: ${missedSets}, Wrong Sets: ${wrongSets}, Hints: ${hints}`)
-        } else {
-            initialRandomCards(cards, currentCards, usedCards)
-        }
-        setsFound++
-        let counter = document.getElementById('setsFound')
-        counter.textContent=`Sets Found: ${setsFound}`
-        },300)
-        
-    } else {
-        console.log(selected)
-        selectedImages.forEach(image=>{
-            console.log(image)
-            image.style.border = "thick solid red"
-        })
-        setTimeout(function(){
-            selected = []
-            let wrongSetsCounter = document.getElementById("wrongSetsCounter")
-            wrongSets++
-            wrongSetsCounter.textContent = `Wrong Sets: ${wrongSets}`
-            initialRandomCards(cards, currentCards, usedCards)
-        },300)
-        
-    }
-}
-
-function pageButtons(){
-    
-    let newGameButton = document.getElementById("newGameButton")
-    newGameButton.addEventListener("click", e => {
-        location.reload()
-    })
-    // let clock = document.getElementById("clock")
-    var minutesLabel = document.getElementById("minutes");
-    var secondsLabel = document.getElementById("seconds");
-    var totalSeconds = 0;
-    setInterval(setTime,1000)
-    function setTime() {
-        ++totalSeconds;
-        elapsedTime = totalSeconds
-        secondsLabel.innerHTML = pad(totalSeconds % 60);
-        minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
-      }
-      
-      function pad(val) {
-        var valString = val + "";
-        if (valString.length < 2) {
-          return "0" + valString;
-        } else {
-          return valString;
-        }
-      }
-
 }

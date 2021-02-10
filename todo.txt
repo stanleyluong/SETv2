@@ -2,6 +2,6 @@ X unclick color is different, need to change it back to normal color
 X put  found sets on same line
 x add wrong sets counter
 x count how many times possible sets button was clicked
-change css media query depending on javascript conditions?
-victory alert didnt work
+x change css media query depending on javascript conditions?
+x victory alert didnt work
 change image sizes when zooming in and out
