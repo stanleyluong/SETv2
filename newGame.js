@@ -71,8 +71,11 @@ const valid = set => {
 
 function initialRandomCards(cards, currentCards, usedCards){
     window.addEventListener("orientationchange",()=>{
-        sizeImages(currentCards)
+        sizeImages(currentCards,document.body.clientHeight,document.body.clientWidth)
     })
+    window.onresize = (e) => {
+        sizeImages(currentCards,e.target.outerHeight,e.target.outerWidth)
+    }
     let possibleSets = document.getElementById("possibleSets")
     while (possibleSets.hasChildNodes()){
         possibleSets.removeChild(possibleSets.lastChild)
@@ -160,7 +163,7 @@ function initialRandomCards(cards, currentCards, usedCards){
         }
         container.appendChild(image)
     })
-    sizeImages(currentCards)
+    sizeImages(currentCards,document.body.clientHeight,document.body.clientWidth)
     let drawOneButton = document.getElementById('drawOne')
     let drawThreeButton = document.getElementById("drawThree")
     drawThreeButton.onclick = () => {
@@ -202,10 +205,8 @@ function submitAttempt(validity, selected, cards, currentCards, usedCards, selec
     let foundSets = document.getElementById('foundSets')
     if (validity === true){
             selectedImages.forEach(image=>{
-                console.log(image)
                 image.style.border = "thick solid greenyellow"
             })
-            console.log('timeout')
         setTimeout(function(){
             let set = document.createElement('div')
             set.className = "set"
@@ -233,9 +234,7 @@ function submitAttempt(validity, selected, cards, currentCards, usedCards, selec
         counter.textContent=`Sets Found: ${setsFound}`
         },300)
     } else {
-        console.log(selected)
         selectedImages.forEach(image=>{
-            console.log(image)
             image.style.border = "thick solid red"
         })
         setTimeout(function(){
@@ -273,9 +272,9 @@ function pageButtons(){
       }
 }
 
-function sizeImages(currentCards){
+function sizeImages(currentCards,height,width){
     let images = document.getElementsByClassName("img")
-    if(window.screen.width < window.screen.height){
+    if(width < height){
         switch(currentCards.length){
             case 1:for(i=0;i<images.length;i++){images[i].style.width = "100%"}break
             case 2:for(i=0;i<images.length;i++){images[i].style.width = "100%"}break
